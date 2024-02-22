@@ -1,6 +1,7 @@
 package com.example.waletapp.model;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 
 import java.util.regex.Pattern;
@@ -12,6 +13,7 @@ public class UserEmliement implements IUser{
     public UserEmliement(String email, String otp) {
         this.email = email;
         this.otp = otp;
+        //Log.d("main", "UserEmliement: "+email+otp+"\n");
     }
 
 

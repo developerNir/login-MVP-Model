@@ -34,8 +34,7 @@ public class ILoginPresenter implements IPresenter{
     }
 
     @Override
-    public int setProgressBer(int Visibility) {
+    public void setProgressBer(int Visibility) {
         loginView.setProgressBer(Visibility);
-        return 0;
     }
 }

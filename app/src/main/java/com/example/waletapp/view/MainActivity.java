@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.waletapp.R;
+import com.example.waletapp.StartMainActivity;
 import com.example.waletapp.presentor.ILoginPresenter;
 
 
@@ -44,15 +46,16 @@ public class MainActivity extends AppCompatActivity implements ILoginView{
         progressBar = findViewById(R.id.progress_circular);
 
 
-
+        // loginPresenter object create ------------------------------
         loginPresenter = new ILoginPresenter(this);
-
-        progressBar.setVisibility(View.GONE);
+        // progressBer InVisible --------------------------------------
+        loginPresenter.setProgressBer(View.INVISIBLE);
 
         loginButton.setOnClickListener(view -> {
+            // login presenter do Login method call -------------------
             loginPresenter.doLogin(edEmail.getText().toString().trim(), edOtp.getText().toString().trim());
-
-            progressBar.setVisibility(View.VISIBLE);
+            // progressBer Visible ------------------------------------
+            loginPresenter.setProgressBer(View.VISIBLE);
         });
 
 
@@ -69,16 +72,20 @@ public class MainActivity extends AppCompatActivity implements ILoginView{
 
     @Override
     public void setLoginSuccess(String msg) {
+        loginPresenter.setProgressBer(View.INVISIBLE);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(MainActivity.this, StartMainActivity.class));
+
     }
 
     @Override
     public void setLoginError(String msg) {
+        loginPresenter.setProgressBer(View.INVISIBLE);
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void setProgressBer(int visibility) {
-
+        progressBar.setVisibility(visibility);
     }
 }
